@@ -40,8 +40,15 @@ public class StudentService {
     public void removeStudentByName(String name) {
         for (Student s : students) {
             if (s.getName().equals(name)) {
-                students.remove(s);  // Bug: ConcurrentModificationException possible
+                students.remove(s);
+                break;
             }
         }
     }
+
+    public int getCount() {
+        return students.size();
+    }
+
+
 }
