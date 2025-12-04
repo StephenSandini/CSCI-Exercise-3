@@ -12,10 +12,11 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.jupiter.version>5.10.0</junit.jupiter.version>
-        <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.15.0</pitest.version>
-        <pitest.junit5.plugin.version>0.12</pitest.junit5.plugin.version>
+
+         <junit.jupiter.versions>5.10.0</junit.jupiter.version>
+         <jacoco.version>0.8.10</jacoco.version>
+         <pitest.version>1.15.0</pitest.version>
+         <pitest.junit5.plugin.version>1.1.0</pitest.junit5.plugin.version>
     </properties>
 
     <dependencies>
@@ -26,7 +27,15 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+              <!-- PIT with JUnit 5 -->
+        <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-junit5-plugin</artifactId>
+            <version>${pitest.junit5.plugin.version}</version>
+        </dependency>
     </dependencies>
+
+         
 
     <build>
         <plugins>
@@ -39,6 +48,8 @@
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
+
+            
 
             <!-- JaCoCo for code coverage -->
             <plugin>
@@ -65,13 +76,21 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.15.0</version>
+                <version>${pitest.version}</version>
                 <configuration>
-                    <targetClasses>classes.*</targetClasses>
-                    <targetTests>testclasses.*</targetTests>
-                    <mutators>DEFAULTS</mutators>
-                    <junit5Plugin>true</junit5Plugin>
-                    <outputFormats><param>HTML</param></outputFormats>
+                    <targetClasses>
+                             classes.*
+                    </targetClasses>
+                    <targetTests>
+                             testclasses.*
+                    </targetTests>
+                    <mutators>
+                             <mutator>DEFAULTS</mutator>
+                    </mutators>
+                    <outputFormats>
+                             <outputFormat>HTML</outputFormat>
+                             <outputFormat>XML</outputFormat>
+                    </outputFormats>
                 </configuration>
             </plugin>
         </plugins>
