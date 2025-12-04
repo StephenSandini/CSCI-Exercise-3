@@ -11,6 +11,8 @@ class StudentServiceTest {
 
         service.addStudent(s1);
         service.addStudent(s2);
+        //There wasn't a test to see if the list added said students.
+        assertEquals(2, service.students.length);
 
         // Test if top student is correctly identified
         Student top = service.getTopStudent();
@@ -27,8 +29,27 @@ class StudentServiceTest {
         assertEquals(3.5, avg, 0.001);
     }
 
-    // Intentionally leave out tests for:
-    // - removeStudentByName
-    // - behavior with empty student list
-    // - Utils methods
+    @Test
+    void testRemoveStudentbyName() {
+        StudentService service = new StudentService();
+        Student s1 = new Student("Alice", 20, 3.5);
+        Student s2 = new Student("Bob", 22, 2.5);
+
+        service.addStudent(s1);
+        service.addStudent(s2);
+
+        //Asserting the first removal
+        service.removeStudentByName("Bob");
+        assertEquals(1, service.students.length);
+        //Asserting the second removal
+        service.removeStudentByName("Alice");
+        assertEquals(0, service.students.length);
+        //Asserting that removing a non-existing student returns the same count
+        int before = service.students.length;
+        service.removeStudentByName("Danny");
+        int after = service.students.length;
+
+        assertEquals(before, after);
+        
+    }
 }
