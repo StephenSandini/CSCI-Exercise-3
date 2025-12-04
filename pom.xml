@@ -65,27 +65,13 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>${pitest.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.pitest</groupId>
-                        <artifactId>pitest-junit5-plugin</artifactId>
-                        <version>${pitest.junit5.plugin.version}</version>
-                    </dependency>
-                </dependencies>
+                <version>1.15.0</version>
                 <configuration>
-                    <targetClasses>
-                        <param>classes.*</param> <!-- Your main classes package -->
-                    </targetClasses>
-                    <targetTests>
-                        <param>testclasses.*Test</param> <!-- Your test classes package -->
-                    </targetTests>
-                    <mutators>
-                        <mutator>DEFAULTS</mutator> <!-- safer for small projects -->
-                    </mutators>
-                    <threads>4</threads>
+                    <targetClasses>classes.*</targetClasses>
+                    <targetTests>testclasses.*</targetTests>
+                    <mutators>DEFAULTS</mutators>
                     <junit5Plugin>true</junit5Plugin>
-                    <verbose>true</verbose>
+                    <outputFormats><param>HTML</param></outputFormats>
                 </configuration>
             </plugin>
         </plugins>
