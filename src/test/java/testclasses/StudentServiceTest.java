@@ -2,6 +2,8 @@ package testclasses;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import classes.Student;
+import classes.StudentService;
 
 class StudentServiceTest {
 
@@ -39,8 +41,6 @@ class StudentServiceTest {
 
         service.addStudent(s1);
         service.addStudent(s2);
-
-
 
         //Asserting the first removal
         service.removeStudentByName("Bob");

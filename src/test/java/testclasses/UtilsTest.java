@@ -2,7 +2,8 @@ package testclasses;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+import classes.Student;
+import classes.Utils;
 class UtilsTest {
 
   @Test
