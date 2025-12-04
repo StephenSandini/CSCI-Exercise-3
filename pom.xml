@@ -63,6 +63,13 @@
              <groupId>org.pitest</groupId>
              <artifactId>pitest-maven</artifactId>
              <version>1.15.0</version>
+             <dependencies>
+                   <dependency>
+                     <groupId>org.pitest</groupId>
+                     <artifactId>pitest-junit5-plugin</artifactId>
+                     <version>0.12</version>
+                    </dependency>
+             </dependencies>
              <configuration>
                  <!-- Main classes to mutate -->
                  <targetClasses>
