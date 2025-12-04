@@ -27,12 +27,7 @@ jobs:
 
     - name: Run PIT Mutation Testing
       continue-on-error: true
-      run: |
-        mvn -B org.pitest:pitest-maven:mutationCoverage \
-            -DskipTests=false \
-            -Dpitest.skip=false \
-            -Dpitest.forkCount=1 \
-            -Dpitest.outputFormats=HTML
+      run: mvn -B org.pitest:pitest-maven:mutationCoverage
 
     - name: Upload JaCoCo Coverage Report
       uses: actions/upload-artifact@v4
