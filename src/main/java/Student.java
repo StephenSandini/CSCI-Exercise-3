@@ -1,3 +1,4 @@
+package classes;
 
 public class Student {
     public String name;  // Should be private
