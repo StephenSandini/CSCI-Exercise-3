@@ -59,11 +59,27 @@
                 </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
-                <version>1.15.0</version>
-            </plugin>
+           <plugin>
+             <groupId>org.pitest</groupId>
+             <artifactId>pitest-maven</artifactId>
+             <version>1.15.0</version>
+             <configuration>
+                 <!-- Main classes to mutate -->
+                 <targetClasses>
+                     <param>classes.*</param>
+                 </targetClasses>
+         
+                 <!-- Test classes to run -->
+                 <targetTests>
+                     <param>testclasses.*Test</param>
+                 </targetTests>
+         
+                 <mutators>
+                     <mutator>STRONGER</mutator>
+                 </mutators>
+         
+             </configuration>
+         </plugin>
         </plugins>
     </build>
 
