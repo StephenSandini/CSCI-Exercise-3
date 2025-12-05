@@ -8,7 +8,7 @@ public class Utils {
     }
 
     public static boolean isValidAge(int age) {
-        if (age < 0) return false;
-        else return true;  // Bug: Allows age > 120
+        if (age < 0 || age > 119) return false;
+        else return true;
     }
 }

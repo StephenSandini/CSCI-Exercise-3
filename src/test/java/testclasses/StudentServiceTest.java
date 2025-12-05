@@ -21,11 +21,25 @@ class StudentServiceTest {
         // Test if top student is correctly identified
         Student top = service.getTopStudent();
         assertEquals("Bob", top.getName());
-    }
+        assertNotEquals("Alice", top.getName());
 
+
+    }
+    @Test
+    void testNullAddStudent() {
+        StudentService service = new StudentService();
+
+        //Null Student
+        service.addStudent(null);
+        assertThrows(NullPointerException.class, () -> service.getTopStudent());
+        assertThrows(NullPointerException.class, () -> service.calculateAverageGpa());
+    }
+    
     @Test
     void testCalculateAverageGpa() {
         StudentService service = new StudentService();
+        //Checking for Empty List
+        assertEquals(0.0, service.calculateAverageGpa(), 0.001);
         service.addStudent(new Student("Alice", 20, 3.5));
         service.addStudent(new Student("Bob", 22, 3.5));
 
@@ -50,10 +64,8 @@ class StudentServiceTest {
         assertEquals(0, service.getCount());
 
         //Asserting that removing a non-existing student returns the same count
-        int before = service.getCount();
         service.removeStudentByName("Danny");
-        int after = service.getCount();
-        assertEquals(before, after);
+        assertEquals(0, service.getCount());
 
     }
 }
