@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
@@ -12,75 +12,87 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.jupiter.version>5.10.0</junit.jupiter.version>
+
+         <junit.jupiter.version>5.10.0</junit.jupiter.version>
+         <jacoco.version>0.8.10</jacoco.version>
+         <pitest.version>1.15.0</pitest.version>
+         <pitest.junit5.plugin.version>1.1.0</pitest.junit5.plugin.version>
     </properties>
 
     <dependencies>
-        <!-- JUnit 5 for testing -->
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <artifactId>junit-jupiter</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
+              <!-- PIT with JUnit 5 -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-junit5-plugin</artifactId>
+            <version>${pitest.junit5.plugin.version}</version>
         </dependency>
     </dependencies>
 
+         
+
     <build>
         <plugins>
-            <!-- Maven Surefire Plugin to run tests -->
+            <!-- Maven Compiler -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
             </plugin>
+
+            
+
+            <!-- JaCoCo for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version> <!-- Use the latest version -->
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                <execution>
-                    <id>report</id>
-                    <phase>prepare-package</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
-           <plugin>
-             <groupId>org.pitest</groupId>
-             <artifactId>pitest-maven</artifactId>
-             <version>1.15.0</version>
-             <configuration>
-                 <!-- Main classes to mutate -->
-                 <targetClasses>
-                     <param>classes.*</param>
-                 </targetClasses>
-         
-                 <!-- Test classes to run -->
-                 <targetTests>
-                     <param>testclasses.*Test</param>
-                 </targetTests>
-         
-                 <mutators>
-                     <mutator>STRONGER</mutator>
-                 </mutators>
-         
-             </configuration>
-         </plugin>
+
+            <!-- PIT Mutation Testing -->
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${pitest.version}</version>
+                <configuration>
+                    <targetClasses>
+                             classes.*
+                    </targetClasses>
+                    <targetTests>
+                             testclasses.*
+                    </targetTests>
+                    <mutators>
+                             <mutator>DEFAULTS</mutator>
+                    </mutators>
+                    <outputFormats>
+                             <outputFormat>HTML</outputFormat>
+                             <outputFormat>XML</outputFormat>
+                    </outputFormats>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
