@@ -58,8 +58,8 @@
              <version>${jacoco.version}</version>
              <configuration>
                  <includes>
-                     <include>classes.Utils*</include>
-                     <include>classes.StudentService*</include>
+                     <include>classes/Utils*</include>
+                     <include>classes/StudentService*</include>
                  </includes>
              </configuration>
              <executions>
