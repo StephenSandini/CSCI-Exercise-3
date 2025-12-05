@@ -79,10 +79,12 @@
                 <version>${pitest.version}</version>
                 <configuration>
                     <targetClasses>
-                             classes.*
+                             <param>classes.Utils</param>
+                             <param>classes.StudentService</param>
                     </targetClasses>
                     <targetTests>
-                             testclasses.*
+                             <param>testclasses.UtilsTest</param>
+                             <param>testclasses.StudentServiceTest</param>
                     </targetTests>
                     <mutators>
                              <mutator>DEFAULTS</mutator>
