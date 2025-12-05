@@ -26,7 +26,6 @@ jobs:
       run: mvn -B clean verify
 
     - name: Run PIT Mutation Testing
-      continue-on-error: true
       run: mvn -B org.pitest:pitest-maven:mutationCoverage
 
     - name: Upload JaCoCo Coverage Report
