@@ -56,6 +56,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                  <includes>
+                         <include>classes/Utils.class</include>
+                         <include>classes/StudentService.class</include>
+                  </includes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
